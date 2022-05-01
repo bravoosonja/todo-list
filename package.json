@@ -1,0 +1,32 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "The objective is to develop a simple Todo List app that provides data persistance to local storage. This project is to be developed using Webpack and incorporate an external library while adhering to the OOP Principles.\r <!-- [👉Live Demo]() -->\r ## Requirements\r 1. Properties of todo-items\r    - title\r    - description\r    - dueDate\r    - priority\r    - notes\r    - checklist\r 2. *Projects* or separate list of todos.\r    - include default *project* on page load\r    - users should be able to create new projects and choose which project their todo-items go into\r 3. Separate application logic from the DOM-related objects\r    - creating new todos\r    - setting todos as complete\r    - changing todo priority\r 4. UI\r    - view all projects\r    - view all todos in each project \r      - title, due date, different colors for different priorities\r    - expand a single todo to view/edit its details\r    - delete a todo\r 5. Webpack\r    - use [date-fns](https://github.com/date-fns/date-fns) library for formatting and manipulating dates and times\r 6. Add data persistence using Web Storage API\r    - localStorage\r      - function to save the projects and todos\r      - function to retrieve the data from the localStorage on first load \r # Skills used\r * HTML\r * CSS\r * JavaScript\r   - localStorage\r * Webpack\r   - Asset management\r   - Output management\r   - Development\r   - Production\r   - External library\r # Lessons learned\r * Brainstorming before development is important - Starting out with a [list of requirements](#requirements) to assess the requirements and creating [future plans](#future-plans) of task list increase efficiency.  \r # Future plans\r - [ ] Set up Webpack & add modules\r - [ ] Develop basic UI\r - [ ] Add functionality\r      - [ ] Properties of todo items\r      - [ ] Projects\r      - [ ] UI\r      - [ ] Add external library\r      - [ ] Add localStorage\r - [ ] Refactor code\r - [ ] Build a production site \r - [ ] Deploy a subfolder to GitHub Pages\r - [ ] Update Readme.md to include final output",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bravoosonja/todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bravoosonja/todo-list/issues"
+  },
+  "homepage": "https://github.com/bravoosonja/todo-list#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
