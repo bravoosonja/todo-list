@@ -40,7 +40,7 @@ The objective is to develop a simple Todo List app that provides data persistanc
   - Production
   - External library
 # Lessons learned
-* Brainstorming before development is important - Starting out with a [list of requirements]() to assess the requirements and having a [future plans]() of task list increases efficiency.  
+* Brainstorming before development is important - Starting out with a [list of requirements](#requirements) to assess the requirements and having a [future plans](#future-plans) of task list increases efficiency.  
 # Future plans
 - [ ] Set up Webpack & add modules
 - [ ] Develop basic UI
