@@ -44,11 +44,11 @@ The objective is to develop a simple Todo List app that provides data persistanc
 - [ ] Add functionality
      - [x] Properties of todo items
      - [ ] Projects
-     - [ ] UI
+     - [x] UI
      - [ ] Add external library
      - [ ] Add localStorage
 - [ ] Modify UI if necessary
-- [ ] Refactor code
+- [ ] Refactor/clean code
 - [ ] Build a production site 
 - [ ] Deploy a subfolder to GitHub Pages
 - [ ] Update Readme.md to include final output
