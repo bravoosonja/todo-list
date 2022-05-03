@@ -2,13 +2,11 @@
 The objective is to develop a simple Todo List app that provides data persistance to local storage. This project is to be developed using Webpack and incorporate an external library while adhering to the OOP Principles.
 <!-- [👉Live Demo]() -->
 ## Requirements
-1. Properties of todo-items
+1. Properties of todo-items (task)
    - title
    - description
    - dueDate
    - priority
-   - notes
-   - checklist
 2. *Projects* or separate list of todos.
    - include default *project* on page load
    - users should be able to create new projects and choose which project their todo-items go into
@@ -43,13 +41,13 @@ The objective is to develop a simple Todo List app that provides data persistanc
 * Brainstorming before development is important - Starting out with a [list of requirements](#requirements) to assess the requirements and creating [future plans](#future-plans) of task list increase efficiency.  
 # Future plans
 - [x] Set up Webpack for development & add modules
-- [ ] Develop basic UI
 - [ ] Add functionality
-     - [ ] Properties of todo items
+     - [x] Properties of todo items
      - [ ] Projects
      - [ ] UI
      - [ ] Add external library
      - [ ] Add localStorage
+- [ ] Modify UI if necessary
 - [ ] Refactor code
 - [ ] Build a production site 
 - [ ] Deploy a subfolder to GitHub Pages

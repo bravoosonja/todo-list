@@ -1,2 +1,4 @@
-import _ from "lodash";
-import "./style.css";
+import './style.css';
+import UI from './ui';
+
+document.addEventListener('DOMContentLoaded', UI.loadHomepage);
