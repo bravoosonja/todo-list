@@ -6,6 +6,7 @@
   --color-4: #00bfa5;
   --background-color:#fafafa;
   --dark-background-color:#eeeeee;
+  --box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 * {
@@ -14,143 +15,177 @@
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
- font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif;
   box-sizing: border-box;
-  background-color: var(--background-color);
 }
 
 body {
   height: 100vh;
-  width: 100vw;
-  font-size:2vh;
+  width: 100%;
+  font-size:1.5vh;
   font-weight: 400;
-
+  overflow: hidden;
+  background-color: var(--background-color);
 }
 
-#content, #header, #projects, #tasks-grid, #task, #projects-container{
-display: flex;
+.content, .header, .projects{
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#header {
+.header {
   width: 100vw;
-  height: 8vh;
+  height: 5vh;
   background-color: var(--color-4);
   color: white;
   font-weight: 600;
-  font-size: 4vh;
+  font-size: 3vh;
   position: sticky;
   z-index: 999;
   top: -10px;
  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
 }
 
-#content {
-  padding: 2%;
+.content {
+  padding: 3%;
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-areas: "projects-container tasks-container";
-  gap: 5rem;
+  gap: 1rem;
 }
 
-#tasks-container{
-  grid-area: tasks-container;
-   flex-direction: column;
-  gap: 2rem;
-}
-
-#tasks{
-display: flex;
-flex-direction: column;
-width: 100%;
-  /* flex-flow: row wrap; */
-  justify-content: center;
-  align-items: center;
-  transition: all 200ms ease-in-out;
-  margin: 0px auto;
-  gap:10px;
-}
-
-#task{
-   display: flex;
-   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 12px 20px;
-  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.125) inset;
-  background-color: var(--color-2);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  
-}
-
-#task label {
-  background-color: var(--color-2);
-}
-
-#task:hover {
-  
-}
-
-#task.completed> #task-title{
-    text-decoration: line-through  rgba(0, 0, 0, 0.671) 2px;
-}
-
-#task.completed{
-   background-color: rgba(74, 206, 163, 0.1);
-}
-
-#task-check{
-   appearance: none;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  border-radius: 50%;
-  background-color: transparent;
-  margin-right: 10px;
-}
-
-#task-check:checked{
-   background-color: var(--color-3);
-   background-size: 12px;
-  background-repeat: no-repeat;
-  background-position: center;
-
-}
-
-#projects-container{
+.projects-container{
   grid-area: projects-container;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: flex-start;
+ 
 }
 
-#projects-container h1, #tasks-container h1 {
+#project-name {
+  width: 70%;
+}
+
+.projects-container, .tasks-container{
+  height: 85vh;
+  padding: 1rem;
+  /* gap: 1rem; */
+  background: white; 
+  box-shadow: var(--box-shadow);
+  border-radius: 12px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.projects-container>h1, .tasks-container>h1 {
   font-weight: 600;
-  font-size: 2.5vh;
+  font-size: 2vh;
   align-items: center;
   justify-content: center;
   display: flex;
 }
 
-#tasks-form-container{
-  gap:3rem;
-  background-color: var(--dark-background-color);
-  border-radius: 12px;
+.tasks-container{
+  grid-area: tasks-container;
 }
 
-#tasks-form, #projects-form {
-  background-color: var(--dark-background-color);
-  padding:1.5rem;
-  border-radius: 12px;
-  gap:3rem;
-  
+.tasks-input, .project-input {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding:1rem;
 }
+
+
+.tasks-filters, li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tasks-filters{
+  padding: 1rem;
+  border-bottom: 3px solid var(--dark-background-color);
+  width: 100%;
+  margin-top: 2rem;
+  justify-content: space-evenly;
+}
+
+.tasks-filters span{
+  /* margin: 0 1rem; */
+  font-size: 1.5vh;
+  cursor: pointer;
+  font-weight: 600;
+  color: #757575;
+}
+
+.tasks-filters span:first-child{
+  margin-left: 0;
+}
+
+.tasks-filters span.active{
+  color: var(--color-4);
+}
+
+.tasks-box{
+  /* margin-top: 20px;
+  margin-right: 5px;
+  padding: 0 20px 10px 25px; */
+  width: 100%;
+  /* border-radius: 15px; */
+}
+.tasks-box.overflow{
+  overflow-y: auto;
+}
+.tasks-box::-webkit-scrollbar{
+  width: 5px;
+}
+.tasks-box::-webkit-scrollbar-track{
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+.tasks-box::-webkit-scrollbar-thumb{
+  background: #e6e6e6;
+  border-radius: 25px;
+}
+
+.tasks-box .task{
+  list-style: none;
+  font-size: 17px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  align-items: flex-start;
+}
+.task-box .task:last-child{
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.task-box .task label{
+  display: flex;
+  align-items: flex-start;
+}
+.task label input{
+  margin-top: 7px;
+}
+.task label p{
+  user-select: none;
+  margin-left: 12px;
+  word-wrap: break-word;
+}
+.task label p.checked{
+  text-decoration: line-through;
+}
+.task-box .settings{
+  position: relative;
+}
+
 
 input, label, option {
   display: inline-block;
-  margin: 15px;
-  background-color: var(--dark-background-color);
+  margin: 1.2rem;
 }
 
 label {
@@ -158,14 +193,13 @@ label {
 }
 
 input[type='text']{
- font-family: inherit;
-  width: 90%;
+  font-family: inherit;
+  width: 40%;
   border: 0;
   border-bottom: 2px solid var(--color-3);
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1.5vh;
   padding: 7px 0;
-  background-color: var(--dark-background-color);
   transition: var(--color-3) 0.2s;
 }
 
@@ -173,16 +207,16 @@ input[type='text']:focus{
   padding-bottom: 6px;  
   font-weight: 300;
   border-width: 3px;
-  border-image: linear-gradient(to right, var(--color-3),var(--color-4));
+  border-image: linear-gradient(to right, var(--color-2),var(--color-4));
   border-image-slice: 1;
 }
 
 input[type='submit']{
-  background-color:var(--color-3);
-  color: black;
+  background-color: var(--color-4);
+  color: white;
   font-weight: 500;
-  padding: 0.5rem;
-  border-radius: 10px;
-
+  padding: 0.4rem;
+  border-radius: 12px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 

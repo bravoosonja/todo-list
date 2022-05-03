@@ -17,47 +17,35 @@
     <div class="content" id="content">
         <div class="projects-container" id="projects-container">
             <h1>Projects</h1>
-            <form id="projects-form" class="form">
+            <div id="project-input" class="project-input">
                 <input type="text" name="project-name" id="project-name" placeholder="Project name">
                 <input type="submit" value="Add New Project">
-            </form>
-            <div class="projects-card"></div>
+            </div>
+            <div class="projects"></div>
         </div>
          <div class="tasks-container" id="tasks-container" >
            <h1>Tasks</h1>
-           <div id="tasks-form-container">
-        <form id="tasks-form" class="form">
-            <input type="text" name="task-title" id="task-title" placeholder="What do you need to do?">
-            <label for="task-due-date">Due Date</label>
-            <input type="date" name="task-due-date" id="task-due-date">
-            <label for="task-priority">Priority</label>
-            <select name="task-priority" id="task-priority">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-            </select>
-            <input type="submit" value="Add New Task">
-        </form>
-        </div>
-        <div class="tasks" id="tasks">
-        <div id="task" >
-          <input type="checkbox" id="task-check">
-          <label id="task-title">Go grocery shopping</label> 
-        </div>
-      <div id="task" >
-          <input type="checkbox" id="task-check">
-          <label id="task-title">Go grocery shopping</label> 
-        </div><div id="task" >
-          <input type="checkbox" id="task-check">
-          <label id="task-title">Go grocery shopping</label> 
-        </div><div id="task" >
-          <input type="checkbox" id="task-check">
-          <label id="task-title">Go grocery shopping</label> 
-        </div><div id="task" >
-          <input type="checkbox" id="task-check">
-          <label id="task-title">Go grocery shopping</label> 
-        </div>
-        </div>
+           <div class="tasks-input" id="tasks-input">
+              <input type="text" name="task-title" id="task-title" placeholder="What do you need to do?">
+              <label for="task-due-date">Due Date</label>
+              <input type="date" name="task-due-date" id="task-due-date">
+              <label for="task-priority">Priority</label>
+              <select name="task-priority" id="task-priority">
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+              </select>
+              <input type="submit" value="Add New Task">
+          </div>
+          <div class="tasks-filters" id="tasks-filters">
+            <span class="active" id="all">All</span>
+            <span id="High">High Priority</span>
+            <span id="Medium">Medium Prirority</span>
+            <span id="Low">Low Priority</span>
+          </div>
+          <div class="tasks-box">
+            <ul class="task"></ul>
+          </div>
     </div>
     </div>
    
