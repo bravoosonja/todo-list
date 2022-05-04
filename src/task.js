@@ -23,9 +23,13 @@ export default class Task {
     return this.dueDate;
   }
 
-  setisChecked(isChecked) {
+  setIsChecked(isChecked) {
     if (!isChecked || isChecked == null) this.isChecked = 'false';
     else this.isChecked = isChecked;
+  }
+
+  getIsChecked() {
+    return this.isChecked;
   }
 
   setPriority(priority) {
