@@ -1,55 +1,42 @@
-function generateID() {
-  return `_${Math.random().toString(16).slice(2)}`;
-}
-
 export default class Task {
-  constructor(title, description, dueDate, priority) {
-    this.id = generateID();
-    this.title = title;
-    this.description = description;
+  constructor(name, dueDate, priority, isChecked, id) {
+    this.name = name;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.isChecked = isChecked;
+    this.id = id;
   }
 
-  get id() {
-    return this.id;
+  setName(name) {
+    this.name = name;
   }
 
-  get title() {
-    return this.title;
+  getName() {
+    return this.name;
   }
 
-  set title(value) {
-    if (value) {
-      this.title = value;
-    }
+  setDate(dueDate) {
+    this.dueDate = dueDate;
   }
 
-  get description() {
-    return this.description;
-  }
-
-  set description(value) {
-    this.description = value;
-  }
-
-  get dueDate() {
+  getDate() {
     return this.dueDate;
   }
 
-  set dueDate(value) {
-    if (value) {
-      this.dueDate = value;
-    }
+  setisChecked(isChecked) {
+    if (!isChecked || isChecked == null) this.isChecked = 'false';
+    else this.isChecked = isChecked;
   }
 
-  get priority() {
-    return this.priority;
+  setPriority(priority) {
+    if (!priority) this.priority = 'Medium';
+    else this.priority = priority;
   }
 
-  set priority(value) {
-    if (value) {
-      this.priority = value;
-    }
+  getPriority() { return this.priority; }
+
+  setId(id) {
+    if (!id) this.id = Date.now();
+    else this.id = id;
   }
 }

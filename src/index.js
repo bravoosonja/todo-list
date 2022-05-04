@@ -1,14 +1,14 @@
 import './style.css';
-import UI from './ui';
+// import UI from './ui';
+// import Task from './task';
+import addTask from './task';
 
-document.addEventListener('DOMContentLoaded', UI.loadHomepage);
-
-const filters = document.querySelectorAll('.tasks-filters span');
-
-filters.forEach((filter) => {
-  filter.addEventListener('click', () => {
-    document.querySelector('span.active').classList.remove('active');
-    filter.classList.add('active');
-    showTodo(filter.id);
+function initAddTask() {
+  const taskForm = document.querySelector('#tasks-input');
+  taskForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    addTask();
   });
-});
+}
+
+document.addEventListener('DOMContentLoaded', initAddTask);

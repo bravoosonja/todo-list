@@ -16,7 +16,7 @@ export default class UI {
     return element;
   }
 
-  static render(filters) {
+  // static render(filters) {
 
-  }
+  // }
 }
