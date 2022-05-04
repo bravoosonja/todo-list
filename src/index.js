@@ -1,14 +1,12 @@
 import './style.css';
-// import UI from './ui';
-// import Task from './task';
-import renderNewTask from './taskController';
+import TaskController from './taskController';
 
 function initAddTask() {
   const taskSubmitButton = document.querySelector('#task-submit');
   taskSubmitButton.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
     event.preventDefault();
-    renderNewTask();
+    TaskController.addTask();
   });
 }
 

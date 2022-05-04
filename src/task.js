@@ -39,8 +39,19 @@ export default class Task {
 
   getPriority() { return this.priority; }
 
+  getId() {
+    return this.id;
+  }
+
   setId(id) {
     if (!id) this.id = Date.now();
     else this.id = id;
+  }
+
+  getDateFormatted() {
+    const day = this.dueDate.split('/')[0];
+    const month = this.dueDate.split('/')[1];
+    const year = this.dueDate.split('/')[2];
+    return `${day}/${month}/${year}`;
   }
 }

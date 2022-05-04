@@ -3,53 +3,48 @@ import {
 } from 'date-fns';
 
 export default class Project {
-  constructor(name) {
+  constructor(name, id) {
     this.name = name;
+    this.id = id;
     this.tasks = [];
-  }
-
-  setName(name) {
-    this.name = name;
   }
 
   getName() {
     return this.name;
   }
 
-  setTasks(tasks) {
-    this.tasks = tasks;
+  setName(name) {
+    if (name) this.name = name;
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  setId(id) {
+    if (!id) this.id = Date.now();
+    else this.id = id;
   }
 
   getTasks() {
     return this.tasks;
   }
 
-  getTask(taskName) {
-    return this.tasks.find((task) => task.getName() === taskName);
-  }
-
-  contains(taskName) {
-    return this.tasks.some((task) => task.getName() === taskName);
-  }
-
-  addTasktoProject(newTask) {
-    if (this.tasks.find((task) => task.getName() === newTask.name)) { return this.tasks.push(newTask); }
-  }
-
-  deleteTaskfromProject(taskName) {
-    this.tasks = this.tasks.filter((task) => task.name !== taskName);
+  setTasks(tasks) {
+    if (tasks) this.tasks.push(tasks);
+    else this.tasks = tasks;
   }
 
   getTasksToday() {
     return this.tasks.filter((task) => {
-      const taskDate = new Date(task.getDateformatted());
+      const taskDate = new Date(task.getDateFormatted());
       return isToday(toDate(taskDate));
     });
   }
 
   getTasksThisWeek() {
     return this.tasks.filter((task) => {
-      const taskDate = new Date(task.getDateformatted());
+      const taskDate = new Date(task.getDateFormatted());
       return isThisWeek(subDays(toDate(taskDate), 1));
     });
   }
