@@ -1,54 +1,25 @@
 export default class Task {
-  constructor(name, dueDate, priority, isChecked, id) {
+  constructor(name, dueDate, priority) {
     this.name = name;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.isChecked = isChecked;
-    this.id = id;
   }
 
-  setName(name) {
-    this.name = name;
+  set isChecked(value) {
+    if (!value || value == null) this.isChecked = 'false';
+    else this.isChecked = value;
   }
 
-  getName() {
-    return this.name;
+  get isChecked() {
+    return this.itemIsChecked;
   }
 
-  setDate(dueDate) {
-    this.dueDate = dueDate;
+  set id(newId) {
+    if (!newId) this.id = Date.now();
+    else this.id = newId;
   }
 
-  getDate() {
-    return this.dueDate;
-  }
-
-  setIsChecked(isChecked) {
-    if (!isChecked || isChecked == null) this.isChecked = 'false';
-    else this.isChecked = isChecked;
-  }
-
-  getIsChecked() {
-    return this.isChecked;
-  }
-
-  setPriority(priority) {
-    if (!priority) this.priority = 'Medium';
-    else this.priority = priority;
-  }
-
-  getPriority() { return this.priority; }
-
-  getId() {
-    return this.id;
-  }
-
-  setId(id) {
-    if (!id) this.id = Date.now();
-    else this.id = id;
-  }
-
-  getDateFormatted() {
+  static dateFormatted() {
     const day = this.dueDate.split('/')[0];
     const month = this.dueDate.split('/')[1];
     const year = this.dueDate.split('/')[2];

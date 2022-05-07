@@ -1,11 +1,15 @@
 import Task from './task';
-import Project from './projects';
+// import Project from './projects';
 
 export default class TaskController {
+  constructor(todoArr) {
+    this.todoArr = todoArr;
+  }
+
   static toggleDone(key) {
-    const index = Project.findTask(key);
-    Project.tasks([index]).isChecked = !Project.tasks([index]).isChecked;
-    TaskController.renderTask(Project.tasks[index]);
+    const index = this.todoArr.findIndex((item) => item.id === Number(key));
+    this.todoArr[index].checked = !this.todoArr[index].checked;
+    TaskController.renderTask(this.todoArr[index]);
   }
 
   static markDone() {
@@ -26,8 +30,7 @@ export default class TaskController {
     taskNode.setAttribute('class', `todo-item${isChecked}`);
     taskNode.setAttribute('data-key', taskItem.id);
     taskNode.innerHTML = `
-        <input id="${taskItem.id} type="checkbox"/>
-        <label for ="${taskItem.id}" class="check"></label>
+        <input id="${taskItem.id} type="checkbox" class="check"/>
         <span>${taskItem.name}</span>
         <span class="priority">${taskItem.priority}</span>
         <div class="todo-item-buttons">
@@ -50,6 +53,14 @@ export default class TaskController {
     const isChecked = false;
 
     const newItem = new Task(name, dueDate, priority, isChecked);
+
+    let todoArr = [];
+    const todo = localStorage.getItem('todo');
+    if (todo === null) {
+      todoArr = [];
+    } else { todoArr = JSON.parse(todo); }
+
+    todoArr.push(newItem);
     TaskController.renderTask(newItem);
   }
 }
