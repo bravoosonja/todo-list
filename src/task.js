@@ -5,15 +5,6 @@ export default class Task {
     this.priority = priority;
   }
 
-  set isChecked(value) {
-    if (!value || value == null) this.isChecked = 'false';
-    else this.isChecked = value;
-  }
-
-  get isChecked() {
-    return this.itemIsChecked;
-  }
-
   set id(newId) {
     if (!newId) this.id = Date.now();
     else this.id = newId;

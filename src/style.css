@@ -155,9 +155,7 @@ body {
   user-select: none;
   word-wrap: break-word;
 }
-#taskTitle.checked{
-  text-decoration: line-through;
-}
+
 
 .priority{
   text-align: right;
@@ -227,23 +225,20 @@ input[type='submit']{
 }
 
 .check {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #333;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--color-2);
+  border: 1px solid rgb(255, 255, 255);
+  -webkit-appearance: none;
 }
 
-.check::before {
-  content: '✓';
-  font-size: 20px;
-  display: none;
+.check:checked {
+  background-color: #1dd2af;
 }
 
-.done .check::before {
-  display: inline;
-  text-decoration: line-through 2px solid var(--color-1);
+.completed {
+  color: rgba(192, 192, 192, 0.8);
+  text-decoration: line-through;
 }

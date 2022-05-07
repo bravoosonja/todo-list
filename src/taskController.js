@@ -2,65 +2,74 @@ import Task from './task';
 // import Project from './projects';
 
 export default class TaskController {
-  constructor(todoArr) {
-    this.todoArr = todoArr;
+  constructor(newItem) {
+    this.todoArr = [];
+    this.newItem = newItem;
   }
 
   static toggleDone(key) {
     const index = this.todoArr.findIndex((item) => item.id === Number(key));
-    this.todoArr[index].checked = !this.todoArr[index].checked;
+    this.todoArr[index].completed = !this.todoArr[index].completed;
     TaskController.renderTask(this.todoArr[index]);
   }
 
-  static markDone() {
+  static markDone(event) {
     const todoList = document.querySelector('#todo-list');
     todoList.addEventListener('click', (event) => {
-      if (event.target.classList.contains('check')) {
+      if (event.target.classList.contains('completed')) {
         const itemKey = event.target.parentElement.dataset.key;
         TaskController.toggleDone(itemKey);
       }
     });
   }
 
+  static deleteTask() {
+    this.parentElement.remove();
+    // const itemKey=event.tar
+    // const index = this.todoArr.findIndex((item) => item.id === Number(key));
+    // const todo = {
+    //   deleted: true,
+    //   ...this.todoArr[index],
+    // };
+    // this.todoArr = this.todoArr.filter((item) => item.id !== Number(key));
+    // TaskController.renderTask(todo);
+  }
+
   static renderTask(taskItem) {
     const todoList = document.querySelector('#todo-list');
-    const isChecked = taskItem.isChecked ? 'done' : '';
     const taskNode = document.createElement('li');
     taskNode.setAttribute('class', 'todo-item');
-    taskNode.setAttribute('class', `todo-item${isChecked}`);
     taskNode.setAttribute('data-key', taskItem.id);
     taskNode.innerHTML = `
-        <input id="${taskItem.id} type="checkbox" class="check"/>
-        <span>${taskItem.name}</span>
+        <input type="checkbox" class="check" ${taskItem.completed ? 'checked' : ''}>
+        <span>${taskItem.dueDate}</span>                       
+        <span class="task ${taskItem.completed ? 'completed' : ''}">${taskItem.name}</span>
         <span class="priority">${taskItem.priority}</span>
-        <div class="todo-item-buttons">
+        
         <button class="btn" id="btn-edit">
          <i class="fa-solid fa-pen-to-square"></i>
         </button>
         <button class="btn" id="btn-delete">
          <i class="fa-solid fa-trash"></i>
         </button>
-        </div>
+       
         `;
     todoList.append(taskNode);
-    TaskController.markDone();
   }
 
   static addTask() {
     const name = document.querySelector('#task-name').value;
     const dueDate = document.querySelector('#task-due-date').value;
     const priority = document.querySelector('#task-priority').value;
-    const isChecked = false;
 
-    const newItem = new Task(name, dueDate, priority, isChecked);
+    this.newItem = new Task(name, dueDate, priority);
 
-    let todoArr = [];
-    const todo = localStorage.getItem('todo');
-    if (todo === null) {
-      todoArr = [];
-    } else { todoArr = JSON.parse(todo); }
+    const todos = localStorage.getItem('todos');
+    if (todos === null) {
+      this.todoArr = [];
+    } else { this.todoArr = JSON.parse(todos); }
 
-    todoArr.push(newItem);
-    TaskController.renderTask(newItem);
+    this.todoArr.push(this.newItem);
+    TaskController.renderTask(this.newItem);
   }
 }
