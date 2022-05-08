@@ -1,26 +1,18 @@
 import Task from './task';
-// import Project from './projects';
+import Project from './project';
 
 export default class TaskController {
-  constructor(newItem) {
-    this.todoArr = [];
-    this.newItem = newItem;
-  }
-
   static toggleDone(key) {
     const index = this.todoArr.findIndex((item) => item.id === Number(key));
-    this.todoArr[index].completed = !this.todoArr[index].completed;
+    this.todoArr[index].isChecked = !this.todoArr[index].isChecked;
     TaskController.renderTask(this.todoArr[index]);
   }
 
   static markDone(event) {
-    const todoList = document.querySelector('#todo-list');
-    todoList.addEventListener('click', (event) => {
-      if (event.target.classList.contains('completed')) {
-        const itemKey = event.target.parentElement.dataset.key;
-        TaskController.toggleDone(itemKey);
-      }
-    });
+    if (event.target.classList.contains('check')) {
+      const itemKey = event.target.dataset.key;
+      TaskController.toggleDone(itemKey);
+    }
   }
 
   static deleteTask() {
@@ -41,11 +33,10 @@ export default class TaskController {
     taskNode.setAttribute('class', 'todo-item');
     taskNode.setAttribute('data-key', taskItem.id);
     taskNode.innerHTML = `
-        <input type="checkbox" class="check" ${taskItem.completed ? 'checked' : ''}>
-        <span>${taskItem.dueDate}</span>                       
-        <span class="task ${taskItem.completed ? 'completed' : ''}">${taskItem.name}</span>
+        <input type="checkbox" class="check" id="${taskItem.id}">
+        <span id="${taskItem.id}">${taskItem.name}</span>
         <span class="priority">${taskItem.priority}</span>
-        
+        <span>${taskItem.dueDate}</span> 
         <button class="btn" id="btn-edit">
          <i class="fa-solid fa-pen-to-square"></i>
         </button>
@@ -61,15 +52,14 @@ export default class TaskController {
     const name = document.querySelector('#task-name').value;
     const dueDate = document.querySelector('#task-due-date').value;
     const priority = document.querySelector('#task-priority').value;
-
-    this.newItem = new Task(name, dueDate, priority);
+    const isChecked = false;
+    const newItem = new Task(name, dueDate, priority, isChecked);
 
     const todos = localStorage.getItem('todos');
-    if (todos === null) {
-      this.todoArr = [];
-    } else { this.todoArr = JSON.parse(todos); }
+    Project.tasks = JSON.parse(todos);
 
-    this.todoArr.push(this.newItem);
-    TaskController.renderTask(this.newItem);
+    Project.addTasks(newItem);
+
+    TaskController.renderTask(newItem);
   }
 }
