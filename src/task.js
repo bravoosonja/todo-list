@@ -1,20 +1,13 @@
 export default class Task {
-  constructor(name, dueDate, priority, isChecked) {
+  constructor(name, dueDate, priority, complete, id) {
     this.name = name;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.isChecked = isChecked;
+    this.complete = complete;
+    this.id = id;
   }
 
-  set id(newId) {
-    if (!newId) this.id = Date.now();
-    else this.id = newId;
-  }
-
-  static dateFormatted() {
-    const day = this.dueDate.split('/')[0];
-    const month = this.dueDate.split('/')[1];
-    const year = this.dueDate.split('/')[2];
-    return `${day}/${month}/${year}`;
+  static createTask(taskItem) {
+    return new Task(taskItem);
   }
 }

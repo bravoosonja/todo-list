@@ -1,38 +1,19 @@
-import {
-  toDate, isToday, isThisWeek, subDays,
-} from 'date-fns';
-
+/* eslint-disable max-len */
 export default class Project {
-  constructor(name) {
+  constructor(name, id) {
     this.name = name;
-    this.tasks = [];
+    this.projects = [];
+    this.id = id;
   }
 
-  // set name(value) {
-  //   if (value) this.name = value;
-  //   else this.name = 'Unassigned';
-  // }
-
-  set id(id) {
-    if (!id) this.id = Date.now();
-    else this.id = id;
+  static createUnassigned() {
+    const unassigned = new Project('Unassigned Tasks', Date.now().toString());
+    this.projects.push(unassigned);
   }
 
-  static addTasks(taskItem) {
-    this.tasks.push(taskItem);
-  }
-
-  get tasksToday() {
-    return this.tasks.filter((task) => {
-      const taskDate = new Date(task.getDateFormatted());
-      return isToday(toDate(taskDate));
-    });
-  }
-
-  get tasksThisWeek() {
-    return this.tasks.filter((task) => {
-      const taskDate = new Date(task.getDateFormatted());
-      return isThisWeek(subDays(toDate(taskDate), 1));
-    });
+  static createProject(projectName) {
+    const newProject = new Project(projectName, Date.now().toString());
+    this.projects.push(newProject);
+    return newProject;
   }
 }

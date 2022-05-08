@@ -24,7 +24,10 @@
                 <button type="submit" id="project-submit" class="btn">Add new project</button>
             </form>
             <div class="projects">
-              <p class="project"><i class="fa-solid fa-inbox"></i>  Unassigned</p>
+              <ul class="projects-list" data-projects>
+                <li class="project">Unassigned</li>
+                <li class="project">Grocery</li>
+                <button class="btn" id="btn-delete-project"><i class="fa-solid fa-trash"></i></button>
             </div>
         </div>
          <div class="tasks-container" id="tasks-container" >
@@ -41,7 +44,18 @@
               </select>
               <button type="submit" id="task-submit" class="btn">Add new task</button>
             </form>
-          <div class="tasks-filters" id="tasks-filters">
+            <div class="todo-list" data-project-display-container>
+              <div class="todo-header">
+                <h2 class="project-title" data-project-title></h2>
+                <p class="task-count" data-project-count></p>
+              </div>
+
+            </div>
+            <div class="todo-body">
+              <div class="tasks" data-tasks>
+              </div>
+            </div>
+          <!-- <div class="tasks-filters" id="tasks-filters">
             <span class="active" id="all">All</span>
             <span id="High">High Priority</span>
             <span id="Medium">Medium Priority</span>
@@ -49,9 +63,16 @@
           </div>
           <div class="tasks-box">
             <ul class="todo-list" id="todo-list"></ul>
-          </div>
+          </div> -->
     </div>
     </div>
+    <template id="task-template">
+      <div class="task">
+        <input type="checkbox"/>
+        <p></p>
+        <span class="cusdtom-checkbox"></span>
+      </div>
+    </template>
    
 </body>
 </html>

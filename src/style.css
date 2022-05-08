@@ -77,17 +77,42 @@ body {
   justify-content: flex-start;
 }
 
+.projects-list{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
 .project {
   font-weight: 600;
   font-size: 1.5vh;
   text-align: center;
-  background-color: var(--color-4);
+  background-color: var(--color-2);
   padding:0.5rem;
-  width: 90%;
+  width: 15vw;
   border-radius: 15px;
   color: white;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.active-project{
+   font-weight: 600;
+  font-size: 1.5vh;
+  text-align: center;
+  background-color: var(--color-4);
+  padding:0.5rem;
+  width: 15vw;
+  border-radius: 15px;
+  color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 

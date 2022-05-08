@@ -33,6 +33,7 @@ The objective is to develop a simple Todo List app that provides data persistanc
   - localStorage
 * Webpack
   - Asset management
+    - csv-loader, xml-loader
   - Output management
   - Development
   - Production
