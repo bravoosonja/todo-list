@@ -78,8 +78,16 @@ body {
 }
 
 .project {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.5vh;
   text-align: center;
+  background-color: var(--color-4);
+  padding:0.5rem;
+  width: 90%;
+  border-radius: 15px;
+  color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
 }
 
 
@@ -227,6 +235,7 @@ input[type='submit']{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .check {

@@ -5,7 +5,9 @@ export default class ProjectController {
     const projects = document.querySelector('#projects');
     const projectNode = document.createElement('p');
     projectNode.setAttribute('class', 'project');
-    projectNode.setAttribute('data-key', Project.id);
+    projectNode.setAttribute('data-key', newProject.id);
+    projectNode.innerHTML = `
+      <p id="${newProject.id}" class="project">${newProject.name}</p>`;
     projects.appendChild(projectNode);
   }
 

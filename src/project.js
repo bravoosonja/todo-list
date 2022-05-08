@@ -18,11 +18,8 @@ export default class Project {
     else this.id = id;
   }
 
-  static addTasks(name, taskItem) {
-    if (!name) {
-      this.name = 'Unassigned';
-      this.tasks.push(taskItem);
-    } else this.name = name; this.tasks.push(taskItem);
+  static addTasks(taskItem) {
+    this.tasks.push(taskItem);
   }
 
   get tasksToday() {
