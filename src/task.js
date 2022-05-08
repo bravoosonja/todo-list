@@ -1,8 +1,9 @@
 export default class Task {
-  constructor(name, dueDate, priority) {
+  constructor(name, dueDate, priority, isChecked) {
     this.name = name;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.isChecked = isChecked;
   }
 
   set id(newId) {
