@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../src/style.css">
 <script src="https://kit.fontawesome.com/69e6e862c1.js" crossorigin="anonymous"></script>
-<script defer src="bundle.js"></script>
+<script src="bundle.js" defer></script>
 </head>
 <body>
     <div class="header" id="header">
@@ -19,7 +19,7 @@
     <div class="content" id="content">
         <div class="projects-container" id="projects-container">
             <h1>Projects</h1>
-            <form id="project-form" class="project-input">
+            <form id="project-form" class="project-input" data-project-form>
                 <input type="text" name="project-name" id="project-name" placeholder="Project name">
                 <button type="submit" id="project-submit" class="btn">Add new project</button>
             </form>
@@ -27,12 +27,12 @@
               <ul class="projects-list" data-projects>
                 <li class="project">Unassigned</li>
                 <li class="project">Grocery</li>
-                <button class="btn" id="btn-delete-project"><i class="fa-solid fa-trash"></i></button>
+                <button class="btn" id="btn-delete-project" data-delete-project-button><i class="fa-solid fa-trash"></i></button>
             </div>
         </div>
-         <div class="tasks-container" id="tasks-container" >
+         <div class="tasks-container" id="tasks-container">
            <h1>Tasks</h1>
-           <form class="tasks-input" id="task-form">
+           <form class="tasks-input" id="task-form" data-task-form>
               <input type="text" name="task-name" id="task-name" placeholder="What do you need to do?">
               <label for="task-due-date">Due Date</label>
               <input type="date" name="task-due-date" id="task-due-date">

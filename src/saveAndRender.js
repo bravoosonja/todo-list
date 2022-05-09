@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-const modSaveAndRender = () => {
+const modSaveAndRender = (() => {
   const projects = JSON.parse(localStorage.getItem('task.projects')) || [];
   const selectedProjectId = localStorage.getItem('task.selectedProjectId');
   const tasksContainer = document.querySelector('[data-tasks]');
@@ -83,6 +83,6 @@ const modSaveAndRender = () => {
     saveToLocalStorage,
     renderTaskCount,
   };
-};
+})();
 
 export default { modSaveAndRender };

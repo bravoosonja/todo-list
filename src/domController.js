@@ -3,24 +3,17 @@ import Task from './task';
 import Project from './project';
 import modSaveAndRender from './saveAndRender';
 
-const domController = () => {
-  const deleteProjectButton = document.querySelector('#btn-delete-project');
-  const tasksContainer = document.querySelector('#tasks-container');
-  const projectsContainer = document.querySelector('[data-projects]');
+// DOM objects and static listeners
+const domController = (() => {
+  const deleteProjectButton = document.querySelector('[data-delete-project-button]');
+  const tasksContainer = document.querySelector('[data-projects]');
   let projects = JSON.parse(localStorage.getItem('task.projects')) || [];
-  const projectForm = document.querySelector('#project-form');
-  const taskForm = document.querySelector('#task-form');
+  const projectForm = document.querySelector('[data-project-form]');
+  const taskForm = document.querySelector('[data-task-from]');
   const projectInput = document.querySelector('#project-name');
   let selectedProjectId = localStorage.getItem('task.selectedProjectId');
 
-  const handleProject = () => {
-    projectsContainer.addEventLister('click', (e) => {
-      if (e.target.tagName.toLowerCase() === 'li') {
-        selectedProjectId = e.target.dataset.selectedProjectId;
-        modSaveAndRender.saveAndRender();
-      }
-    });
-  };
+  // }
 
   const handleTask = () => {
     tasksContainer.addEventListener('click', (e) => {
@@ -34,24 +27,26 @@ const domController = () => {
     });
   };
 
-  function handleDeleteProject() {
+  const handleDeleteProject = () => {
     deleteProjectButton.addEventListener('click', () => {
       projects = projects.filter((project) => project.id !== selectedProjectId);
       selectedProjectId = null;
       modSaveAndRender.saveAndRender();
+      console.log('handleDeleteProject');
     });
-  }
+  };
 
   //
   function handleTaskInput() {
-    taskForm.addEventListener('click', (e) => {
+    console.log('handleTaskInput');
+    taskForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const taskName = document.querySelector('#task-name').value;
       const dueDate = document.querySelector('#task-due-date').value;
       const priority = document.querySelector('#task-priority').value;
       if (taskName == null || taskName === '') return;
-      const task = Task.createTask(taskName, dueDate, priority, false, Date.now().toString());
-      console.log('handleTaskInput');
+      const task = new Task(taskName, dueDate, priority, false, Date.now().toString());
+
       const selectedProject = projects.find((project) => project.id === selectedProjectId);
       selectedProject.tasks.push(task);
       modSaveAndRender.saveAndRender();
@@ -59,7 +54,7 @@ const domController = () => {
   }
 
   function handleProjectInput() {
-    projectForm.addEventListener('click', (e) => {
+    projectForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const projectName = projectInput.value;
       if (projectName == null || projectName === '') return;
@@ -72,12 +67,22 @@ const domController = () => {
   }
 
   return {
-    handleProject,
+    selectedProjectId,
     handleTask,
     handleDeleteProject,
     handleTaskInput,
     handleProjectInput,
   };
-};
+})();// end of modSaveAndRender
 
-export default { domController };
+function handleProject() {
+  const projectsContainer = document.querySelector('[data-projects]');
+  projectsContainer.addEventLister('click', (e) => {
+    if (e.target.tagName.toLowerCase() === 'li') {
+      domController.selectedProjectId = e.target.dataset.selectedProjectId;
+      modSaveAndRender.saveAndRender();
+    }
+  });
+}
+
+export default { domController, handleProject };
