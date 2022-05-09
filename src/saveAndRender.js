@@ -1,25 +1,25 @@
 /* eslint-disable max-len */
 
-const modSaveAndRender = (() => {
+const modSaveAndRender = () => {
   const projects = JSON.parse(localStorage.getItem('task.projects')) || [];
   const selectedProjectId = localStorage.getItem('task.selectedProjectId');
   const tasksContainer = document.querySelector('[data-tasks]');
   const projectsContainer = document.querySelector('[data-projects]');
 
-  function clearElement(element) {
+  const clearElement = (element) => {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
     }
-  }
+  };
 
-    function saveToLocalStorage() {
-        if (typeof window !== 'undefined') { 
-        localStorage.setItem('task.projects', JSON.stringify(projects));
-        localStorage.setItem('task.selectedProjectId', selectedProjectId);
-        }
-  }
+  const saveToLocalStorage = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('task.projects', JSON.stringify(projects));
+      localStorage.setItem('task.selectedProjectId', selectedProjectId);
+    }
+  };
 
-  function renderTasks(selectedProject) {
+  const renderTasks = (selectedProject) => {
     const taskTemplate = document.getElementById('task-template');
 
     selectedProject.tasks.forEach((task) => {
@@ -32,29 +32,29 @@ const modSaveAndRender = (() => {
       label.append(task.name);
       tasksContainer.appendChild(taskElement);
     });
-  }
+  };
 
-  function renderTaskCount(selectedProject) {
+  const renderTaskCount = (selectedProject) => {
     const projectCountElement = document.querySelector('[data-project-count]');
     const incompleteTaskCount = selectedProject.tasks.filter((task) => !task.complete).length;
     const taskString = incompleteTaskCount === 1 ? 'task' : 'tasks';
     projectCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
-  }
+  };
 
-  function renderProjects() {
-    projects.forEach((list) => {
+  const renderProjects = () => {
+    projects.forEach((project) => {
       const projectElement = document.createElement('li');
       projectElement.dataset.projectId = project.id;
       projectElement.classList.add('list-name');
-      projectElement.innerText = list.name;
-      if (list.id === selectedProjectId) {
+      projectElement.innerText = project.name;
+      if (project.id === selectedProjectId) {
         projectElement.classList.add('active-list');
       }
       projectsContainer.appendChild(projectElement);
     });
-  }
+  };
 
-  function render() {
+  const render = () => {
     const projectDisplayContainer = document.querySelector('[data-project-display-container]');
     const projectTitleElement = document.querySelector('[data-project-title]');
 
@@ -71,20 +71,18 @@ const modSaveAndRender = (() => {
       clearElement(tasksContainer);
       renderTasks(selectedProject);
     }
-  }
+  };
 
-  function saveAndRender() {
+  const saveAndRender = () => {
     saveToLocalStorage();
     render();
-  }
+  };
 
   return {
-    saveToLocalStorage,
     saveAndRender,
+    saveToLocalStorage,
     renderTaskCount,
   };
-    
-})();
+};
 
-
-export { saveToLocalStorage, saveAndRender, renderTaskCount };
+export default { modSaveAndRender };
