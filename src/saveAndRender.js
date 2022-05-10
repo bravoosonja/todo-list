@@ -13,10 +13,11 @@ const modSaveAndRender = (() => {
   };
 
   const saveToLocalStorage = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('task.projects', JSON.stringify(projects));
-      localStorage.setItem('task.selectedProjectId', selectedProjectId);
-    }
+    // if (typeof window !== 'undefined') {
+    localStorage.setItem('task.projects', JSON.stringify(projects));
+    localStorage.setItem('task.selectedProjectId', selectedProjectId);
+    console.log('saveToLocalStorage');
+    // }
   };
 
   const renderTasks = (selectedProject) => {
@@ -45,10 +46,10 @@ const modSaveAndRender = (() => {
     projects.forEach((project) => {
       const projectElement = document.createElement('li');
       projectElement.dataset.projectId = project.id;
-      projectElement.classList.add('list-name');
+      projectElement.classList.add('project-name');
       projectElement.innerText = project.name;
       if (project.id === selectedProjectId) {
-        projectElement.classList.add('active-list');
+        projectElement.classList.add('active-project');
       }
       projectsContainer.appendChild(projectElement);
     });
@@ -61,8 +62,8 @@ const modSaveAndRender = (() => {
     clearElement(projectsContainer);
     renderProjects();
 
-    const selectedProject = projects.find((project) => this.project.id === this.selectedProjectId);
-    if (this.selectedProjectId == null) {
+    const selectedProject = projects.find((project) => project.id === selectedProjectId);
+    if (selectedProjectId == null) {
       projectDisplayContainer.style.display = 'none';
     } else {
       projectDisplayContainer.style.display = '';
@@ -76,6 +77,7 @@ const modSaveAndRender = (() => {
   const saveAndRender = () => {
     saveToLocalStorage();
     render();
+    console.log('saveAndRender');
   };
 
   return {

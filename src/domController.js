@@ -3,17 +3,15 @@ import Task from './task';
 import Project from './project';
 import modSaveAndRender from './saveAndRender';
 
-// DOM objects and static listeners
 const domController = (() => {
   const deleteProjectButton = document.querySelector('[data-delete-project-button]');
-  const tasksContainer = document.querySelector('[data-projects]');
-  let projects = JSON.parse(localStorage.getItem('task.projects')) || [];
+  const tasksContainer = document.querySelector('[data-tasks]');
+  const projectsContainer = document.querySelector('[data-projects]');
   const projectForm = document.querySelector('[data-project-form]');
   const taskForm = document.querySelector('[data-task-from]');
   const projectInput = document.querySelector('#project-name');
+  let projects = JSON.parse(localStorage.getItem('task.projects')) || [];
   let selectedProjectId = localStorage.getItem('task.selectedProjectId');
-
-  // }
 
   const handleTask = () => {
     tasksContainer.addEventListener('click', (e) => {
@@ -27,7 +25,7 @@ const domController = (() => {
     });
   };
 
-  const handleDeleteProject = () => {
+  const deleteProject = () => {
     deleteProjectButton.addEventListener('click', () => {
       projects = projects.filter((project) => project.id !== selectedProjectId);
       selectedProjectId = null;
@@ -36,53 +34,59 @@ const domController = (() => {
     });
   };
 
-  //
-  function handleTaskInput() {
+  const handleProject = () => {
+    projectsContainer.addEventLister('click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'li') {
+        selectedProjectId = e.target.dataset.selectedProjectId;
+        modSaveAndRender.saveAndRender();
+      }
+    });
+  };
+
+  const handleProjectInput = (e) => {
+    e.preventDefault();
+    const projectName = projectInput.value;
+    if (projectName == null || projectName === '') return;
+    const project = new Project(projectName, Date.now().toString());
+    // projectInput.value = null;
+    projects.push(project);
+
+    modSaveAndRender.saveAndRender();
+    console.log('went through to saveAndRender');
+  };
+
+  const handleTaskInput = () => {
+    // e.preventDefault();
     console.log('handleTaskInput');
-    taskForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const taskName = document.querySelector('#task-name').value;
-      const dueDate = document.querySelector('#task-due-date').value;
-      const priority = document.querySelector('#task-priority').value;
-      if (taskName == null || taskName === '') return;
-      const task = new Task(taskName, dueDate, priority, false, Date.now().toString());
+    const taskName = document.querySelector('#task-name').value;
+    const dueDate = document.querySelector('#task-due-date').value;
+    const priority = document.querySelector('#task-priority').value;
+    if (taskName == null || taskName === '') return;
+    const task = new Task(taskName, dueDate, priority, false, Date.now().toString());
 
-      const selectedProject = projects.find((project) => project.id === selectedProjectId);
-      selectedProject.tasks.push(task);
-      modSaveAndRender.saveAndRender();
-    });
-  }
-
-  function handleProjectInput() {
-    projectForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const projectName = projectInput.value;
-      if (projectName == null || projectName === '') return;
-      const project = Project.createProject(projectName);
-      projectInput.value = null;
-      project.push(project);
-      modSaveAndRender.saveAndRender();
-      console.log('projectForm');
-    });
-  }
+    const selectedProject = projects.find((project) => project.id === selectedProjectId);
+    selectedProject.tasks.push(task);
+    modSaveAndRender.saveAndRender();
+  };
 
   return {
-    selectedProjectId,
+    deleteProjectButton,
+    tasksContainer,
+    taskForm,
+    projectForm,
+    projectsContainer,
+    projectInput,
+    handleProject,
     handleTask,
-    handleDeleteProject,
     handleTaskInput,
     handleProjectInput,
+    deleteProject,
   };
-})();// end of modSaveAndRender
+})();
 
-function handleProject() {
-  const projectsContainer = document.querySelector('[data-projects]');
-  projectsContainer.addEventLister('click', (e) => {
-    if (e.target.tagName.toLowerCase() === 'li') {
-      domController.selectedProjectId = e.target.dataset.selectedProjectId;
-      modSaveAndRender.saveAndRender();
-    }
-  });
+function initEventListeners() {
+  domController.projectForm.addEventListener('submit', domController.handleProjectInput);
+  // domController.taskForm.addEventListener('submit', domController.handleTaskInput);
 }
 
-export default { domController, handleProject };
+export default { domController, initEventListeners };

@@ -11,9 +11,9 @@ export default class Project {
     this.projects.push(unassigned);
   }
 
-  static createProject(projectName) {
-    const newProject = new Project(projectName, Date.now().toString());
-    this.projects.push(newProject);
-    return newProject;
-  }
+  // static createProject(projectName) {
+  //   const newProject = new Project(projectName, Date.now().toString());
+  //   this.projects.push(newProject);
+  //   return newProject;
+  // }
 }

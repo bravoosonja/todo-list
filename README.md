@@ -41,7 +41,8 @@ The objective is to develop a simple Todo List app that provides data persistanc
 # Lessons learned
 * Brainstorming before development is important - Starting out with a [list of requirements](#requirements) to assess the requirements and creating [future plans](#future-plans) of task list increase efficiency.  
 * ```.stopImmediatePropagation()``` - When task input was submitted, the same input was submitted twice on the Todo List. 
-* removing the direct parent element of a node - 
+* Removing the direct parent element of a node 
+* Revealing module pattern - to use event listeners inside of a module pattern.
 # Future plans
 - [x] Set up Webpack for development & add modules
 - [ ] Add functionality
