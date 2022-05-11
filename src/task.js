@@ -7,7 +7,7 @@ export default class Task {
     this.id = id;
   }
 
-  static createTask(taskItem) {
-    return new Task(taskItem);
-  }
+  // static createTask(taskItem) {
+  //   return new Task(taskItem);
+  // }
 }

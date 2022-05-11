@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import Project from './project';
 
 const modSaveAndRender = (() => {
   const projects = JSON.parse(localStorage.getItem('task.projects')) || [];
@@ -16,7 +17,7 @@ const modSaveAndRender = (() => {
     // if (typeof window !== 'undefined') {
     localStorage.setItem('task.projects', JSON.stringify(projects));
     localStorage.setItem('task.selectedProjectId', selectedProjectId);
-    console.log('saveToLocalStorage');
+    console.log('saveToLocalStorage ran');
     // }
   };
 
@@ -63,8 +64,15 @@ const modSaveAndRender = (() => {
     renderProjects();
 
     const selectedProject = projects.find((project) => project.id === selectedProjectId);
-    if (selectedProjectId == null) {
-      projectDisplayContainer.style.display = 'none';
+    const projectUnassigned = projects.find((project) => !project.id);
+    const projectName = document.querySelector('#project-name').value;
+
+    if (projectName == null) {
+      projectDisplayContainer.style.display = '';
+      projectTitleElement.innerText = 'Unassigned';
+      renderTaskCount(projectUnassigned);
+      clearElement(tasksContainer);
+      renderTasks(projectUnassigned);
     } else {
       projectDisplayContainer.style.display = '';
       projectTitleElement.innerText = selectedProject.name;
@@ -81,7 +89,7 @@ const modSaveAndRender = (() => {
   };
 
   return {
-    saveAndRender,
+    init: saveAndRender(),
     saveToLocalStorage,
     renderTaskCount,
   };

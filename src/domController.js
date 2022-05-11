@@ -9,7 +9,11 @@ const domController = (() => {
   const projectsContainer = document.querySelector('[data-projects]');
   const projectForm = document.querySelector('[data-project-form]');
   const taskForm = document.querySelector('[data-task-from]');
-  const projectInput = document.querySelector('#project-name');
+  // const projectInput = document.querySelector('#project-name');
+  const taskName = document.querySelector('#task-name').value;
+  const dueDate = document.querySelector('#task-due-date').value;
+  const priority = document.querySelector('#task-priority').value;
+  const projectName = document.querySelector('#project-name').value;
   let projects = JSON.parse(localStorage.getItem('task.projects')) || [];
   let selectedProjectId = localStorage.getItem('task.selectedProjectId');
 
@@ -43,39 +47,37 @@ const domController = (() => {
     });
   };
 
+  const createProject = () => new Project(projectName, Date.now().toString(), []);
+
   const handleProjectInput = (e) => {
     e.preventDefault();
-    const projectName = projectInput.value;
-    if (projectName == null || projectName === '') return;
-    const project = new Project(projectName, Date.now().toString());
-    // projectInput.value = null;
-    projects.push(project);
 
+    if (projectName == null || projectName === '') return;
+    const project = createProject();
+    projects.push(project);
     modSaveAndRender.saveAndRender();
     console.log('went through to saveAndRender');
   };
 
-  const handleTaskInput = () => {
-    // e.preventDefault();
-    console.log('handleTaskInput');
-    const taskName = document.querySelector('#task-name').value;
-    const dueDate = document.querySelector('#task-due-date').value;
-    const priority = document.querySelector('#task-priority').value;
-    if (taskName == null || taskName === '') return;
-    const task = new Task(taskName, dueDate, priority, false, Date.now().toString());
+  const createTask = () => new Task(taskName, dueDate, priority, false, Date.now().toString());
 
+  const handleTaskInput = (e) => {
+    e.preventDefault();
+    console.log('handleTaskInput');
+    if (taskName == null || taskName === '') return;
+    const task = createTask(taskName, dueDate, priority, false, Date.now().toString());
     const selectedProject = projects.find((project) => project.id === selectedProjectId);
     selectedProject.tasks.push(task);
     modSaveAndRender.saveAndRender();
   };
 
   return {
+
     deleteProjectButton,
     tasksContainer,
     taskForm,
     projectForm,
     projectsContainer,
-    projectInput,
     handleProject,
     handleTask,
     handleTaskInput,
