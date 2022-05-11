@@ -2,18 +2,30 @@
 export default class Project {
   constructor(name, id) {
     this.name = name;
-    this.projects = [];
     this.id = id;
+    this.tasks = [];
   }
 
-  static createUnassigned() {
-    const unassigned = new Project('Unassigned Tasks', Date.now().toString());
-    this.projects.push(unassigned);
+  get name() {
+    return this.name;
   }
 
-  // static createProject(projectName) {
-  //   const newProject = new Project(projectName, Date.now().toString());
-  //   this.projects.push(newProject);
-  //   return newProject;
-  // }
+  getId() {
+    return this.id;
+  }
+
+  static createUnassigned(projectName) {
+    if (!projectName) {
+      const newTask = new Project('Unassigned', Date.now().toString(), []);
+    }
+  }
+
+  static getSelectedProject() {
+    const projects = JSON.parse(localStorage.getItem('task.projects')) || [];
+    const selectedProjectId = localStorage.getItem('task.selectedProjectId');
+    const selectedProject = projects.find((id) => projects.id === selectedProjectId);
+    return this.tasks.find((selectedProjectId) => this.task.getId() === selectedProjectId);
+  }
+
+  // const selectedProject = projects.find((project) => project.id === selectedProjectId);
 }
