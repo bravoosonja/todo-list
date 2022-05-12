@@ -1,6 +1,19 @@
 /* eslint-disable max-len */
-import Project from './project';
+export function createProject(name) {
+  return {
+    name,
+    todos: [],
+  };
+}
 
+export function createTask(name, dueDate, priority) {
+  return {
+    name,
+    dueDate,
+    priority,
+    complete: false,
+  };
+}
 const modSaveAndRender = (() => {
   const projects = JSON.parse(localStorage.getItem('task.projects')) || [];
   const selectedProjectId = localStorage.getItem('task.selectedProjectId');
@@ -14,11 +27,8 @@ const modSaveAndRender = (() => {
   };
 
   const saveToLocalStorage = () => {
-    // if (typeof window !== 'undefined') {
     localStorage.setItem('task.projects', JSON.stringify(projects));
     localStorage.setItem('task.selectedProjectId', selectedProjectId);
-    console.log('saveToLocalStorage ran');
-    // }
   };
 
   const renderTasks = (selectedProject) => {
@@ -56,7 +66,7 @@ const modSaveAndRender = (() => {
     });
   };
 
-  const render = () => {
+  function render() {
     const projectDisplayContainer = document.querySelector('[data-project-display-container]');
     const projectTitleElement = document.querySelector('[data-project-title]');
 
@@ -64,15 +74,10 @@ const modSaveAndRender = (() => {
     renderProjects();
 
     const selectedProject = projects.find((project) => project.id === selectedProjectId);
-    const projectUnassigned = projects.find((project) => !project.id);
-    const projectName = document.querySelector('#project-name').value;
+    console.log(selectedProject);
 
-    if (projectName == null) {
-      projectDisplayContainer.style.display = '';
-      projectTitleElement.innerText = 'Unassigned';
-      renderTaskCount(projectUnassigned);
-      clearElement(tasksContainer);
-      renderTasks(projectUnassigned);
+    if (selectedProjectId == null) {
+      projectDisplayContainer.style.display = 'none';
     } else {
       projectDisplayContainer.style.display = '';
       projectTitleElement.innerText = selectedProject.name;
@@ -80,7 +85,7 @@ const modSaveAndRender = (() => {
       clearElement(tasksContainer);
       renderTasks(selectedProject);
     }
-  };
+  }
 
   const saveAndRender = () => {
     saveToLocalStorage();
@@ -95,4 +100,4 @@ const modSaveAndRender = (() => {
   };
 })();
 
-export default { modSaveAndRender };
+export { modSaveAndRender };
