@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
-import Task from './task';
-import Project from './project';
-import modSaveAndRender from './saveAndRender';
+import { createProject, createTask, modSaveAndRender } from './saveAndRender';
 
 const domController = (() => {
   const deleteProjectButton = document.querySelector('[data-delete-project-button]');
@@ -14,9 +12,10 @@ const domController = (() => {
   const dueDate = document.querySelector('#task-due-date').value;
   const priority = document.querySelector('#task-priority').value;
   const projectName = document.querySelector('#project-name').value;
-  let projects = JSON.parse(localStorage.getItem('task.projects')) || [];
+  let projects = JSON.parse(localStorage.getItem('projects')) || [];
   let selectedProjectId = localStorage.getItem('task.selectedProjectId');
 
+  // if this doesn't work use regular function
   const handleTask = () => {
     tasksContainer.addEventListener('click', (e) => {
       if (e.target.tagName.toLowerCase() === 'input') {
@@ -47,29 +46,24 @@ const domController = (() => {
     });
   };
 
-  const createProject = () => new Project(projectName, Date.now().toString(), []);
-
-  const handleProjectInput = (e) => {
+  function handleProjectInput(e) {
     e.preventDefault();
-
     if (projectName == null || projectName === '') return;
-    const project = createProject();
+    const project = createProject(projectName);
     projects.push(project);
     modSaveAndRender.saveAndRender();
     console.log('went through to saveAndRender');
-  };
+  }
 
-  const createTask = () => new Task(taskName, dueDate, priority, false, Date.now().toString());
-
-  const handleTaskInput = (e) => {
+  function handleTaskInput(e) {
     e.preventDefault();
     console.log('handleTaskInput');
     if (taskName == null || taskName === '') return;
-    const task = createTask(taskName, dueDate, priority, false, Date.now().toString());
+    const task = createTask(taskName, dueDate, priority);
     const selectedProject = projects.find((project) => project.id === selectedProjectId);
     selectedProject.tasks.push(task);
     modSaveAndRender.saveAndRender();
-  };
+  }
 
   return {
 
@@ -84,11 +78,13 @@ const domController = (() => {
     handleProjectInput,
     deleteProject,
   };
-})();
+})(); // end of module
 
 function initEventListeners() {
   domController.projectForm.addEventListener('submit', domController.handleProjectInput);
-  // domController.taskForm.addEventListener('submit', domController.handleTaskInput);
+  domController.taskForm.addEventListener('submit', domController.handleTaskInput);
 }
 
-export default { domController, initEventListeners };
+export default {
+  createProject, createTask, domController, initEventListeners,
+};
